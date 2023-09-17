@@ -1,5 +1,5 @@
-# S-P500-Data-Analysis-Project
-This repository contains Python code that scrapes historical stock price data for S&P 500 companies and performs analysis to calculate the Compound Annual Growth Rate (CAGR) of stock prices. The analysis focuses on the average stock price changes over the years from 2013 to 2022.
+# S&P500-Data-Analysis-Project
+This repository contains my Python code that scrapes historical stock price data for S&P 500 companies and performs analysis to calculate the Compound Annual Growth Rate (CAGR) of stock prices. The analysis focuses on the average stock price changes over the years from 2013 to 2022. The output Excel file is also provided
 
 Overview
 
