@@ -1,0 +1,37 @@
+The historical stock data for all s&p500 stocks is retrieved using Yahoo Finance Libraries and APIs (yfinance and stock_info from yahoo_fin)
+
+The code then iterates through each year from 2013-2022 within this historical data.
+
+For each year, it calculates the start and end indices of the trading days in that year.
+
+Selects the closing prices for trading days within a year and calculates the average to create an average price for the year.
+
+The resulting average closing price for that specific year is rounded to four decimal places and stored in a DataFrame.
+
+Creates an output file with each stock's resulting average price for every year (2013-2022) stored using ExcelWriter from Pandas.
+
+Finally, Compounded Annual Growth Rates (CAGRs) are calculated for every stock, stored in another DataFrame and written onto the second excel sheet. 
+The top, middle, and bottom 20 ranked stocks based on CAGRs are stored on the corresponding sheets with their tickers and CAGR %.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+CAGR formula used: (beginning value / final value)^(1 / time in years) - 1
+Specific block of code where CAGR is calculated using this formula:
+(Actual calculation in lines 26-31 of this file and lines 78-83 of ProjectCode.py file):
+
+# Calculate stock price CAGR for each stock
+    cagr_results = []
+    for symbol in sp500:
+        stock_data = final_df[final_df['Symbol'] == symbol]
+        if not stock_data.empty:
+            num_intervals = len(stock_data) - 1
+            if num_intervals > 0:  # Avoid division by zero
+                stock_price_cagr = (
+                    (stock_data.iloc[-1]['Average Stock Price ($)'] / stock_data.iloc[0]['Average Stock Price ($)']) ** (1 / num_intervals) - 1
+                )
+            else:
+                stock_price_cagr = 0.0  # Set to 0 if no intervals
+
+            cagr_result = pd.DataFrame({
+                'Symbol': [symbol],
+                'Stock Price CAGR (%)': [stock_price_cagr * 100],
+            })
+            cagr_results.append(cagr_result)
